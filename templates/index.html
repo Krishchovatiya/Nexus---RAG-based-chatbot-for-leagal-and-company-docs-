@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus — Enterprise Intelligence Bot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+  <div id="notify"></div>
+
+  <!-- ── Header ── -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">N</div>
+      Nexus
+    </div>
+    <div class="header-status">
+      <span class="status-dot">System Online</span>
+      <span id="docCount">0 Documents</span>
+      <span id="msgCount">0 Queries</span>
+    </div>
+    <div class="header-model">
+      <span class="model-badge">⚡ Nemotron 12B VL</span>
+      <span class="model-via">via OpenRouter · Free</span>
+    </div>
+  </header>
+
+  <!-- ── App Shell ── -->
+  <div class="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+      <!-- API Key -->
+      <div class="sidebar-section">
+        <div class="section-label">OpenRouter API Key</div>
+        <div class="api-key-wrap">
+          <input type="password" id="apiKeyInput" class="api-key-input"
+                 placeholder="sk-or-v1-..." autocomplete="off" />
+          <button class="api-key-toggle" id="toggleKey" title="Show / hide key">👁</button>
+        </div>
+        <div class="api-key-hint">
+          Free key at <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">openrouter.ai/keys</a>
+        </div>
+      </div>
+
+      <!-- Upload -->
+      <div class="sidebar-section">
+        <div class="section-label">Knowledge Base</div>
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" id="fileInput" accept=".pdf,.txt,.md,.csv,.json" multiple />
+          <div class="upload-icon">📂</div>
+          <div class="upload-label">
+            Drop <strong>PDFs, TXT, MD</strong> or click<br />
+            Contracts · Policies · Finance docs
+          </div>
+        </div>
+
+        <div class="doc-list" id="docList"></div>
+
+        <div id="processingWrap" style="display:none; margin-top:8px;">
+          <div class="processing-label">Processing documents…</div>
+          <div class="processing-bar"></div>
+        </div>
+
+        <button class="process-btn" id="processBtn" disabled>
+          ⚡ Ingest Documents
+        </button>
+      </div>
+
+      <!-- Mode -->
+      <div class="sidebar-section">
+        <div class="section-label">Analysis Mode</div>
+        <div class="mode-grid" id="modeGrid">
+          <button class="mode-btn active" data-mode="general"><span class="mode-emoji">🏢</span>General</button>
+          <button class="mode-btn" data-mode="legal"><span class="mode-emoji">⚖️</span>Legal</button>
+          <button class="mode-btn" data-mode="finance"><span class="mode-emoji">💰</span>Finance</button>
+          <button class="mode-btn" data-mode="risk"><span class="mode-emoji">🛡️</span>Risk</button>
+        </div>
+      </div>
+
+      <!-- Quick Prompts -->
+      <div class="sidebar-section sidebar-prompts">
+        <div class="section-label">Quick Queries</div>
+        <div class="prompt-chips" id="promptChips"></div>
+      </div>
+
+    </aside>
+
+    <!-- Chat Panel -->
+    <main class="chat-panel">
+
+      <div class="chat-header">
+        <div class="chat-title">Enterprise Intelligence Conversation</div>
+        <div class="chat-meta">
+          <div class="stat-pill" id="modePill">🏢 General</div>
+          <button id="clearBtn" class="clear-btn">Clear</button>
+        </div>
+      </div>
+
+      <div class="message-stream" id="stream">
+        <div class="welcome-state" id="welcome">
+          <div class="welcome-glyph">⬡</div>
+          <div class="welcome-title">Enterprise Knowledge<br />&amp; Contract Intelligence</div>
+          <div class="welcome-sub">
+            Powered by <strong>NVIDIA Nemotron Nano 12B V2 VL</strong> via OpenRouter (free).<br />
+            Upload documents, ingest them, then ask anything about your corpus.
+          </div>
+          <div class="welcome-steps">
+            <div class="step-card"><div class="step-num">1</div>Get a free key at openrouter.ai</div>
+            <div class="step-card"><div class="step-num">2</div>Upload your documents above</div>
+            <div class="step-card"><div class="step-num">3</div>Click Ingest to index them</div>
+            <div class="step-card"><div class="step-num">4</div>Ask anything about your docs</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-bar">
+        <div class="input-wrap">
+          <textarea id="userInput" rows="1"
+            placeholder="Ask about policies, contracts, risk clauses, financial obligations…"></textarea>
+          <button class="send-btn" id="sendBtn">➤</button>
+        </div>
+        <div class="input-hint">
+          <span><kbd>Enter</kbd> to send &nbsp;·&nbsp; <kbd>Shift+Enter</kbd> for new line</span>
+          <span id="charCount">0 chars</span>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="/static/js/renderer.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

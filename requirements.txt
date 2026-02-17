@@ -1,0 +1,16 @@
+# Nexus Enterprise Bot — Python Dependencies
+#
+# The application runs on Python stdlib ONLY (no packages required).
+# Install the optional packages below for enhanced features.
+
+# ── Optional: Better PDF extraction ──────────────────────────────────────────
+# Without this, a heuristic fallback is used (works for most PDFs).
+# Install with:  pip install PyPDF2
+PyPDF2>=3.0.0
+
+# ── Optional: Faster async server ────────────────────────────────────────────
+# If you want to use FastAPI/uvicorn instead of the built-in http.server,
+# you can swap main.py for a FastAPI version.
+# fastapi>=0.110.0
+# uvicorn>=0.29.0
+# python-multipart>=0.0.9
